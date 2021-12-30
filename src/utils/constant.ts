@@ -1,1 +1,1 @@
-export const LIMIT = 10;
+export const notesPerPage = 10;

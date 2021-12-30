@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 
 import { Note } from './Note';
+import { Pagination } from './Pagination';
 import { useFetchNotes } from '../hooks/fetchNotes'
 import { useNotesContext } from '../hooks/notesContext';
 
@@ -15,12 +16,13 @@ export function Notes() {
     }, [fetchNotes, page]);
 
     return (
-        <>
+        <div className='container mt-5'>
             <div>
                 {notes.map(note => (
                     <Note key={note.id} note={note} />
                 ))}
             </div>
-        </>
+            <Pagination total={total} />
+        </div>
     )
 }
