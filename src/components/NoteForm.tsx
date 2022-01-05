@@ -10,13 +10,18 @@ interface LocationState {
 
 export function NoteForm() {
     const location = useLocation();
-    const { note } = location.state as LocationState;
+
+    let currentNote = undefined;
+    if (location.state !== null) {
+        const { note } = location.state as LocationState;
+        currentNote = note;
+    }
 
     const {
         formData: { title, body },
         onChange,
         onSubmit
-    } = useNoteForm(note);
+    } = useNoteForm(currentNote);
 
     return (
         <div>

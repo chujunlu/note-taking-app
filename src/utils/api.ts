@@ -22,6 +22,14 @@ export const getNotes = async (page?: string, limit?: string) => {
     }
 }
 
+export const createNote = async (body: FormType) => {
+    try {
+        await api.post("/notes", body);
+    } catch (err) {
+        throw new Error();
+    }
+}
+
 export const editNote = async (id: number, body: FormType) => {
     try {
         await api.patch(`/notes/${id}`, body);

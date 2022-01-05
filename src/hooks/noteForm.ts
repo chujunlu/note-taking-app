@@ -4,8 +4,9 @@ import {
     ChangeEvent, SyntheticEvent } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-import { NoteType } from './notesContext'
-import { editNote } from '../utils/api'
+import { NoteType, useNotesContext } from './notesContext'
+import { createNote, editNote } from '../utils/api'
+import { notesPerPage } from '../utils/constant'
 
 export function useNoteForm(note?: NoteType) {
     const [formData, setFormData] = useState({
@@ -15,6 +16,11 @@ export function useNoteForm(note?: NoteType) {
 
     const navigate = useNavigate();
     const isCreatingNote = note === undefined;
+
+    const [{ total }, _] = useNotesContext();
+    const lastPage = total % notesPerPage === 0
+        ? total / notesPerPage + 1
+        : Math.ceil(total / notesPerPage);
 
     const onChange = useCallback(
         (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void => {
@@ -27,9 +33,21 @@ export function useNoteForm(note?: NoteType) {
     const onSubmit = useCallback(
         async (e: SyntheticEvent) => {
             e.preventDefault();
+
             if (isCreatingNote) {
-                // call create note
-                // set title and body back to empty string
+                try {
+                    await createNote(formData);
+                } catch (err) {
+                    console.log(err);
+                } finally {
+                    setFormData({
+                        ...formData,
+                        title: '',
+                        body: ''
+                    })
+                    // Go to the last page since newly created note is at the end
+                    navigate(`/${lastPage}`);
+                }
             } else {
                 try {
                     await editNote(note.id, formData);
@@ -40,7 +58,6 @@ export function useNoteForm(note?: NoteType) {
                     navigate('/');
                 }
             }
-            
         },
         [formData, isCreatingNote, navigate, note],
     )

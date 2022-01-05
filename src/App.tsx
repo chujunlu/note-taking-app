@@ -14,6 +14,7 @@ export function App() {
           <Route path='/' element={<Notes />} />
           <Route path='/:page' element={<Notes />} />
           <Route path='/notes/:id' element={<NoteForm />} />
+          <Route path='/create-note' element={<NoteForm />} />
         </Routes>
       </NotesProvider>
     </div>
