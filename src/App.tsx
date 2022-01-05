@@ -3,6 +3,7 @@ import { Routes, Route } from 'react-router-dom';
 
 import './App.css';
 import { Notes } from './components/Notes'
+import { NoteForm } from './components/NoteForm';
 import { NotesProvider } from './hooks/notesContext'
 
 export function App() {
@@ -12,6 +13,7 @@ export function App() {
         <Routes>
           <Route path='/' element={<Notes />} />
           <Route path='/:page' element={<Notes />} />
+          <Route path='/notes/:id' element={<NoteForm />} />
         </Routes>
       </NotesProvider>
     </div>
