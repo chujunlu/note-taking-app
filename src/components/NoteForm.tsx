@@ -1,27 +1,26 @@
 import React from "react"
 import { useLocation } from "react-router-dom"
 
+import { NoteState } from './Note'
 import { useNoteForm } from "../hooks/noteForm"
-import { NoteType } from '../hooks/notesContext'
-
-interface LocationState {
-    note: NoteType
-}
 
 export function NoteForm() {
     const location = useLocation();
 
-    let currentNote = undefined;
+    let currentNote;
+    let currentPage;
+
     if (location.state !== null) {
-        const { note } = location.state as LocationState;
+        const { note, page } = location.state as NoteState;
         currentNote = note;
+        currentPage = page;
     }
 
     const {
         formData: { title, body },
         onChange,
         onSubmit
-    } = useNoteForm(currentNote);
+    } = useNoteForm(currentNote, currentPage);
 
     return (
         <div>

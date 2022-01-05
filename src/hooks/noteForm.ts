@@ -8,7 +8,7 @@ import { NoteType, useNotesContext } from './notesContext'
 import { createNote, editNote } from '../utils/api'
 import { notesPerPage } from '../utils/constant'
 
-export function useNoteForm(note?: NoteType) {
+export function useNoteForm(note?: NoteType, page?: number) {
     const [formData, setFormData] = useState({
         title: note?.title || '',
         body: note?.body || ''
@@ -16,11 +16,7 @@ export function useNoteForm(note?: NoteType) {
 
     const navigate = useNavigate();
     const isCreatingNote = note === undefined;
-
     const [{ total }, _] = useNotesContext();
-    const lastPage = total % notesPerPage === 0
-        ? total / notesPerPage + 1
-        : Math.ceil(total / notesPerPage);
 
     const onChange = useCallback(
         (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void => {
@@ -35,6 +31,11 @@ export function useNoteForm(note?: NoteType) {
             e.preventDefault();
 
             if (isCreatingNote) {
+                // Calculate the last page after creating a note
+                const lastPage = total % notesPerPage === 0
+                ? total / notesPerPage + 1
+                : Math.ceil(total / notesPerPage);
+
                 try {
                     await createNote(formData);
                 } catch (err) {
@@ -54,12 +55,11 @@ export function useNoteForm(note?: NoteType) {
                 } catch (err) {
                     console.log(err);
                 } finally {
-                    // Todo: Can I go back to where I was before the edit page?
-                    navigate('/');
+                    navigate(`/${page}`);
                 }
             }
         },
-        [formData, isCreatingNote, navigate, note],
+        [formData, isCreatingNote, navigate, note, page, total],
     )
 
     return {

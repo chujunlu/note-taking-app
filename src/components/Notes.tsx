@@ -24,7 +24,7 @@ export function Notes() {
             </div>
             <div>
                 {notes.map(note => (
-                    <Note key={note.id} note={note} />
+                    <Note key={note.id} note={note} page={Number(page)} />
                 ))}
             </div>
             <Pagination total={total} />

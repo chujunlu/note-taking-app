@@ -3,17 +3,21 @@ import { Link } from "react-router-dom"
 
 import { NoteType } from '../hooks/notesContext'
 
-export function Note({ note } : { note: NoteType }) {
+export interface NoteState {
+    note: NoteType
+    page: number
+}
+
+export function Note({ note, page } : NoteState) {
     const { title, body, id } = note;
 
     return (
         <div>
             <h3>{title}</h3>
             <p>{body}</p>
-            {/* Is it possible to pass note object to the linked component */}
             <Link
                 to={`/notes/${id}`}
-                state={{ note }}
+                state={{ note, page }}
                 className="btn btn-light">
                 Edit
             </Link>

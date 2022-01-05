@@ -12,7 +12,7 @@ type FormType = {
     body: string
 }
 
-export const getNotes = async (page?: string, limit?: string) => {
+export const getNotes = async (page?: number, limit?: string) => {
     try {
         const res = await api.get(`/notes?page=${page}&limit=${limit}`);
         const { _embedded: { notes }, total } = res.data;
