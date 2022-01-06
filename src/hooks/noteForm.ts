@@ -16,7 +16,7 @@ export function useNoteForm(note?: NoteType, page?: number) {
 
     const navigate = useNavigate();
     const isCreatingNote = note === undefined;
-    const [{ total }, _] = useNotesContext();
+    const [{ total }] = useNotesContext();
 
     const onChange = useCallback(
         (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void => {

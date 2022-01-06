@@ -37,3 +37,11 @@ export const editNote = async (id: number, body: FormType) => {
         throw new Error();
     }
 }
+
+export const deleteNote = async (id: number) => {
+    try {
+        await api.delete(`/notes/${id}`);
+    } catch (err) {
+        throw new Error();
+    }
+}

@@ -9,7 +9,7 @@ import { useNotesContext } from '../hooks/notesContext';
 export function Notes() {
     const { page=1 } = useParams();
     const fetchNotes = useFetchNotes();
-    const [{ notes, total }, dispatch] = useNotesContext();
+    const [{ notes, total }] = useNotesContext();
 
     useEffect(() => {
         fetchNotes(page);
