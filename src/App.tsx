@@ -5,6 +5,7 @@ import './App.css';
 import { Notes } from './components/Notes'
 import { NoteForm } from './components/NoteForm';
 import { NotesProvider } from './hooks/notesContext'
+import { NotFound } from './components/NotFound';
 
 export function App() {
   return (
@@ -12,9 +13,10 @@ export function App() {
       <NotesProvider>
         <Routes>
           <Route path='/' element={<Notes />} />
-          <Route path='/:page' element={<Notes />} />
-          <Route path='/notes/:id' element={<NoteForm />} />
+          <Route path='/:page(\\d+)' element={<Notes />} />
+          <Route path='/notes/:id(\\d+)' element={<NoteForm />} />
           <Route path='/create-note' element={<NoteForm />} />
+          <Route path='*' element={<NotFound />} />
         </Routes>
       </NotesProvider>
     </div>
