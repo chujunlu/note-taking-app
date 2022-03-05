@@ -14,8 +14,6 @@ export function useDeleteNote() {
         async (id, page) => {
             try {
                 await deleteNote(id);
-            } catch (err) {
-                console.log(err);
             } finally {
                 // If the deleted node was the only note at last page,
                 // go to a page before

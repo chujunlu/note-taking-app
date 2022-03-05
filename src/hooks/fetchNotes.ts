@@ -1,3 +1,5 @@
+import axios from "axios";
+
 import { useCallback } from 'react'
 import { useNotesContext } from './notesContext'
 import { getNotes } from '../utils/api'
@@ -7,9 +9,17 @@ export function useFetchNotes() {
     const [, dispatch] = useNotesContext();
 
     return useCallback(
-        async (page=1, limit=notesPerPage.toString()) => {
-            const { notes, total } = await getNotes(page, limit);
-            dispatch({ notes, total });
+        async (page=1, limit=notesPerPage.toString()): Promise<void> => {
+            try {
+                const { notes, total } = await getNotes(page, limit);
+                dispatch({ notes, total });
+            } catch (error) {
+                if (axios.isAxiosError(error)) {
+                    console.error(error.message);
+                } else {
+                    console.error("Failed to get all notes");
+                }
+            }
         }, [dispatch]
     );
 }

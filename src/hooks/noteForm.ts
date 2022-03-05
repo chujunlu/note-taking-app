@@ -9,7 +9,7 @@ import { createNote, editNote } from '../utils/api'
 import { notesPerPage } from '../utils/constant'
 
 export function useNoteForm(note?: NoteType, page?: number) {
-    const [formData, setFormData] = useState({
+    const [formData, setFormData] = useState<{ title: string, body: string }>({
         title: note?.title || '',
         body: note?.body || ''
     });
@@ -38,8 +38,6 @@ export function useNoteForm(note?: NoteType, page?: number) {
 
                 try {
                     await createNote(formData);
-                } catch (err) {
-                    console.log(err);
                 } finally {
                     setFormData({
                         ...formData,
@@ -52,8 +50,6 @@ export function useNoteForm(note?: NoteType, page?: number) {
             } else {
                 try {
                     await editNote(note.id, formData);
-                } catch (err) {
-                    console.log(err);
                 } finally {
                     navigate(`/${page}`);
                 }
