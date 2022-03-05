@@ -7,7 +7,7 @@ import { useFetchNotes } from '../hooks/fetchNotes'
 import { useNotesContext } from '../hooks/notesContext';
 
 export function Notes() {
-    const { page=1 } = useParams();
+    const { page = '1' } = useParams<{ page: string }>();
     const fetchNotes = useFetchNotes();
     const [{ notes, total }] = useNotesContext();
 

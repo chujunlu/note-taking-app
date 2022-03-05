@@ -13,7 +13,7 @@ export function App() {
       <NotesProvider>
         <Routes>
           <Route path='/' element={<Notes />} />
-          <Route path='/:page(\\d+)' element={<Notes />} />
+          <Route path='/:page' element={<Notes />} />
           <Route path='/notes/:id(\\d+)' element={<NoteForm />} />
           <Route path='/create-note' element={<NoteForm />} />
           <Route path='*' element={<NotFound />} />
