@@ -9,22 +9,24 @@ import { createNote, editNote } from '../utils/api'
 import { notesPerPage } from '../utils/constant'
 
 export function useNoteForm(note?: NoteType, page?: number) {
-    const [formData, setFormData] = useState<{ title: string, body: string }>({
-        title: note?.title || '',
-        body: note?.body || ''
-    });
+    const [title, setTitle] = useState<string>(note?.title || '');
+    const [body, setBody] = useState<string>(note?.body || '');
 
     const navigate = useNavigate();
     const isCreatingNote = note === undefined;
     const [{ total }] = useNotesContext();
 
-    const onChange = useCallback(
-        (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void => {
-            setFormData({
-                ...formData,
-                [e.target.name]: e.target.value
-            })
-    }, [formData]);
+    const onTitleChange = useCallback(
+        (e: ChangeEvent<HTMLInputElement>): void => {
+            setTitle(e.target.value);
+        }, []
+    );
+
+    const onBodyChange = useCallback(
+        (e: ChangeEvent<HTMLTextAreaElement>): void => {
+            setBody(e.target.value);
+        }, []
+    );
 
     const onSubmit = useCallback(
         async (e: SyntheticEvent) => {
@@ -37,19 +39,16 @@ export function useNoteForm(note?: NoteType, page?: number) {
                 : Math.ceil(total / notesPerPage);
 
                 try {
-                    await createNote(formData);
+                    await createNote({ title, body });
                 } finally {
-                    setFormData({
-                        ...formData,
-                        title: '',
-                        body: ''
-                    })
+                    setTitle('');
+                    setBody('');
                     // Go to the last page since newly created note is at the end
                     navigate(`/${lastPage}`);
                 }
             } else {
                 try {
-                    await editNote(note.id, formData);
+                    await editNote(note.id, { title, body });
                 } finally {
                     if (page) {
                         navigate(`/${page}`);
@@ -62,12 +61,14 @@ export function useNoteForm(note?: NoteType, page?: number) {
                 }
             }
         },
-        [formData, isCreatingNote, navigate, note, page, total],
+        [title, body, isCreatingNote, navigate, note, page, total],
     )
 
     return {
-        formData,
-        onChange,
+        title,
+        onTitleChange,
+        body,
+        onBodyChange,
         onSubmit
     }
 }

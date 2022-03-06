@@ -17,8 +17,10 @@ export function NoteForm() {
     }
 
     const {
-        formData: { title, body },
-        onChange,
+        title,
+        body,
+        onTitleChange,
+        onBodyChange,
         onSubmit
     } = useNoteForm(currentNote, currentPage);
 
@@ -30,7 +32,7 @@ export function NoteForm() {
                     placeholder="Add note title"
                     name="title"
                     value={title}
-                    onChange={onChange}
+                    onChange={onTitleChange}
                     required
                 />
                 <textarea
@@ -39,7 +41,7 @@ export function NoteForm() {
                     rows={5}
                     placeholder="Add note body"
                     value={body}
-                    onChange={onChange}
+                    onChange={onBodyChange}
                     required
                 ></textarea>
                 <input type="submit" className="btn btn-dark my-1" value="Submit" />
