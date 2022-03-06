@@ -7,7 +7,7 @@ export function NotFound () {
       <div>
         <h1>404! The page you are looking for was not found.</h1>
         <p>
-          <Link to="/">Go home</Link>
+          <Link to="/">Go to home page</Link>
         </p>
       </div>
     );

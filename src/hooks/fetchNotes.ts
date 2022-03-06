@@ -1,17 +1,20 @@
 import axios from "axios";
 
 import { useCallback } from 'react'
+import { useNavigate } from "react-router-dom";
+
 import { useNotesContext } from './notesContext'
 import { getNotes } from '../utils/api'
 import { notesPerPage } from '../utils/constant';
 
 export function useFetchNotes() {
+    const navigate = useNavigate();
     const [, dispatch] = useNotesContext();
 
     return useCallback(
         async (page, limit=notesPerPage.toString()): Promise<void> => {
             if (isNaN(Number(page))) {
-                page = '1';
+                navigate('not-found');
             }
 
             try {
@@ -24,6 +27,6 @@ export function useFetchNotes() {
                     console.error("Failed to get all notes");
                 }
             }
-        }, [dispatch]
+        }, [navigate, dispatch]
     );
 }
