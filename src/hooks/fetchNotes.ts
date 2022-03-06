@@ -9,7 +9,11 @@ export function useFetchNotes() {
     const [, dispatch] = useNotesContext();
 
     return useCallback(
-        async (page=1, limit=notesPerPage.toString()): Promise<void> => {
+        async (page, limit=notesPerPage.toString()): Promise<void> => {
+            if (isNaN(Number(page))) {
+                page = '1';
+            }
+
             try {
                 const { notes, total } = await getNotes(page, limit);
                 dispatch({ notes, total });

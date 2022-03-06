@@ -12,7 +12,7 @@ type FormType = {
     body: string
 }
 
-export const getNotes = async (page?: number, limit?: string) => {
+export const getNotes = async (page?: string, limit?: string) => {
     // Typescript is expecting this function to return { nodes, total}
     // If catch error here, the return type is undefined. Take care of
     // error catching in the component.
