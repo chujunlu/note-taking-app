@@ -24,7 +24,7 @@ export function NoteForm() {
 
     return (
         <div>
-            <form className="form my-1" onSubmit={onSubmit}>
+            <form className="form-group my-1" onSubmit={onSubmit}>
                 <input
                     type="text"
                     placeholder="Add note title"

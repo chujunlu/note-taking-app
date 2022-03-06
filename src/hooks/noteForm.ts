@@ -51,7 +51,14 @@ export function useNoteForm(note?: NoteType, page?: number) {
                 try {
                     await editNote(note.id, formData);
                 } finally {
-                    navigate(`/${page}`);
+                    if (page) {
+                        navigate(`/${page}`);
+                    } else {
+                        // Click edit from a note detail page. Go back to detail page
+                        // after editing
+                        navigate(-1);
+                    }
+                    
                 }
             }
         },

@@ -6,7 +6,7 @@ import { useDeleteNote } from '../hooks/deleteNote'
 
 export interface NoteState {
     note: NoteType
-    page: number
+    page: number | undefined
 }
 
 export function Note({ note, page } : NoteState) {
@@ -18,7 +18,7 @@ export function Note({ note, page } : NoteState) {
             <h3>{title}</h3>
             <p>{body}</p>
             <Link
-                to={`/notes/${id}`}
+                to={`/edit-note/${id}`}
                 state={{ note, page }}
                 className="btn btn-light">
                 Edit

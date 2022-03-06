@@ -21,6 +21,11 @@ export const getNotes = async (page?: string, limit?: string) => {
     return { notes, total };
 }
 
+export const getNote = async (id: string) => {
+    const res = await api.get(`/notes/${id}`);
+    return res.data;
+}
+
 export const createNote = async (body: FormType) => {
     try {
         await api.post("/notes", body);
