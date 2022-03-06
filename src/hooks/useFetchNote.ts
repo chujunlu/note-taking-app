@@ -2,7 +2,7 @@ import { useState, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
-import { NoteType } from "./notesContext";
+import { NoteType } from "./useNotesContext";
 import { getNote } from "../utils/api";
 
 export function useFetchNote() {

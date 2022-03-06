@@ -2,7 +2,7 @@ import React from "react"
 import { useLocation } from "react-router-dom"
 
 import { NoteState } from './Note'
-import { useNoteForm } from "../hooks/noteForm"
+import { useNoteForm } from "../hooks/useNoteForm"
 
 export function NoteForm() {
     const location = useLocation();

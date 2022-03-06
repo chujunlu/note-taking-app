@@ -3,8 +3,8 @@ import { Link, useParams } from 'react-router-dom'
 
 import { Note } from './Note';
 import { Pagination } from './Pagination';
-import { useFetchNotes } from '../hooks/fetchNotes'
-import { useNotesContext } from '../hooks/notesContext';
+import { useFetchNotes } from '../hooks/useFetchNotes'
+import { useNotesContext } from '../hooks/useNotesContext';
 
 export function Notes() {
     const { page = '1' } = useParams<{ page: string }>();

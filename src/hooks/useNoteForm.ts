@@ -4,7 +4,7 @@ import {
     ChangeEvent, SyntheticEvent } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-import { NoteType, useNotesContext } from './notesContext'
+import { NoteType, useNotesContext } from './useNotesContext'
 import { createNote, editNote } from '../utils/api'
 import { notesPerPage } from '../utils/constant'
 

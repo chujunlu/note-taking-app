@@ -3,7 +3,7 @@ import axios from "axios";
 import { useCallback } from 'react'
 import { useNavigate } from "react-router-dom";
 
-import { useNotesContext } from './notesContext'
+import { useNotesContext } from './useNotesContext'
 import { getNotes } from '../utils/api'
 import { notesPerPage } from '../utils/constant';
 

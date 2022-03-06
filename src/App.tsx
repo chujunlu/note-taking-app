@@ -5,7 +5,7 @@ import './App.css';
 import { Notes } from './components/Notes';
 import { NoteDetail } from './components/NoteDetail';
 import { NoteForm } from './components/NoteForm';
-import { NotesProvider } from './hooks/notesContext'
+import { NotesProvider } from './hooks/useNotesContext'
 import { NotFound } from './components/NotFound';
 
 export function App() {

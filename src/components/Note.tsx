@@ -1,8 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom"
 
-import { NoteType } from '../hooks/notesContext'
-import { useDeleteNote } from '../hooks/deleteNote'
+import { NoteType } from '../hooks/useNotesContext'
+import { useDeleteNote } from '../hooks/useDeleteNote'
 
 export interface NoteState {
     note: NoteType

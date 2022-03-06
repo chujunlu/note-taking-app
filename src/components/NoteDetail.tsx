@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { Link, useParams, useNavigate } from "react-router-dom";
 
-import { useFetchNote } from "../hooks/fetchNote";
+import { useFetchNote } from "../hooks/useFetchNote";
 
 export function NoteDetail() {
     const navigate = useNavigate();
